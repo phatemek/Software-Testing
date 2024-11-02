@@ -431,6 +431,30 @@ class AuthenticationControllerTest {
                         put("country", "Country");
                         put("city", "City");
                     }});
+                }},
+                new HashMap<String, Object>() {{
+                    put("username", "");
+                    put("password", "password");
+                    put("email", "test@example.com");
+                    put("role", "client");
+                }},
+                new HashMap<String, Object>() {{
+                    put("username", "testUser");
+                    put("password", "");
+                    put("email", "test@example.com");
+                    put("role", "client");
+                }},
+                new HashMap<String, Object>() {{
+                    put("username", "testUser");
+                    put("password", "password");
+                    put("email", "");
+                    put("role", "client");
+                }},
+                new HashMap<String, Object>() {{
+                    put("username", "testUser");
+                    put("password", "password");
+                    put("email", "test@example.com");
+                    put("role", "");
                 }}
         );
     }
