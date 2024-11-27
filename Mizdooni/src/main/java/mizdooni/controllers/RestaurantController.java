@@ -26,7 +26,7 @@ class RestaurantController {
     @GetMapping("/restaurants/{restaurantId}")
     public Response getRestaurant(@PathVariable int restaurantId) {
         Restaurant restaurant = ControllerUtils.checkRestaurant(restaurantId, restaurantService);
-        return Response.ok("restaurant found", restaurant);
+        return Response.ok("restaurant found", restaurant); // bug?
     }
 
     @GetMapping("/restaurants")
@@ -90,7 +90,7 @@ class RestaurantController {
         if (restaurantService.restaurantExists(name)) {
             throw new ResponseException(HttpStatus.CONFLICT, "restaurant name is taken");
         }
-        return Response.ok("restaurant name is available");
+        return Response.ok("restaurant name is available"); // empty names?
     }
 
     @GetMapping("/restaurants/types")
