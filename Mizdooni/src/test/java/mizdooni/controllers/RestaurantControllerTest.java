@@ -55,6 +55,14 @@ class RestaurantControllerTest {
     }
 
     @Test
+    void getRestaurant_RestaurantNotFound_Exception() throws Exception{
+        when(restaurantService.getRestaurant(1)).thenReturn(null);
+
+        mockMvc.perform(get("/restaurants/1"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     void getRestaurants_RestaurantsExist_Ok() throws Exception {
         var restaurants = new PagedList<>(List.of(restaurant), 1, 10);
 

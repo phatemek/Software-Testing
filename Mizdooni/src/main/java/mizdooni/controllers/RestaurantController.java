@@ -26,7 +26,7 @@ class RestaurantController {
     @GetMapping("/restaurants/{restaurantId}")
     public Response getRestaurant(@PathVariable int restaurantId) {
         Restaurant restaurant = ControllerUtils.checkRestaurant(restaurantId, restaurantService);
-        return Response.ok("restaurant found", restaurant); // bug?
+        return Response.ok("restaurant found", restaurant);
     }
 
     @GetMapping("/restaurants")
