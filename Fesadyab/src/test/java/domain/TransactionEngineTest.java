@@ -103,6 +103,33 @@ public class TransactionEngineTest {
     }
 
     @Test
+    void testGetTransactionPatternAboveThreshold_WithPatternAndTransactionEqualToThreshold() {
+        Transaction txn1 = new Transaction();
+        txn1.transactionId = 1;
+        txn1.amount = 200;
+
+        Transaction txn2 = new Transaction();
+        txn2.transactionId = 2;
+        txn2.amount = 1200;
+
+        Transaction txn3 = new Transaction();
+        txn3.transactionId = 3;
+        txn3.amount = 500;
+
+        Transaction txn4 = new Transaction();
+        txn4.transactionId = 4;
+        txn4.amount = 2200;
+
+        engine.transactionHistory.add(txn1);
+        engine.transactionHistory.add(txn2);
+        engine.transactionHistory.add(txn3);
+        engine.transactionHistory.add(txn4);
+
+        int result = engine.getTransactionPatternAboveThreshold(500);
+        assertEquals(1000, result);  // Expected pattern difference
+    }
+
+    @Test
     void testGetTransactionPatternAboveThreshold_BelowThreshold() {
         Transaction txn1 = new Transaction();
         txn1.transactionId = 1;
