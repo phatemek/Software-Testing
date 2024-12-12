@@ -1,0 +1,64 @@
+name: Java CI for Fesadyab
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Fesadyab/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'Fesadyab/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      cache-key: ${{ steps.cache-keys.outputs.key }}
+    
+    steps:
+    - uses: actions/checkout@v3
+      name: Checkout code
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Cache Maven packages
+      uses: actions/cache@v3
+      id: cache-keys
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-m2-
+
+    - name: Build with Maven
+      run: mvn -B package
+      working-directory: Fesadyab
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Cache Maven packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2
+        key: ${{ needs.build.outputs.cache-key }}
+
+    - name: Run tests with Maven
+      run: mvn test --file Fesadyab/pom.xml
+      working-directory: Fesadyab
