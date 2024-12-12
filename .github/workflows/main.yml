@@ -60,5 +60,5 @@ jobs:
         key: ${{ needs.build.outputs.cache-key }}
 
     - name: Run tests with Maven
-      run: mvn test --file Fesadyab/pom.xml
+      run: mvn test
       working-directory: Fesadyab
