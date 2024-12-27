@@ -8,8 +8,8 @@ Feature: Calculate average rating of a restaurant
       | 5    | 3       | 5        | 5       |
     When the average rating is calculated
     Then the average rating should be:
-      | food | service | ambiance | overall |
-      | 4    | 4       | 4        | 4.33    |
+      | food | service | ambiance | overall           |
+      | 4    | 4       | 4        | 4.333333333333333 |
 
   Scenario: Calculate average rating with no reviews
     Given a restaurant with no reviews
@@ -19,7 +19,7 @@ Feature: Calculate average rating of a restaurant
       | 0    | 0       | 0        | 0       |
 
   Scenario: Calculate average rating with one review
-    Given a restaurant with the following review:
+    Given a restaurant with the following reviews:
       | food | service | ambiance | overall |
       | 5    | 4       | 3        | 5       |
     When the average rating is calculated
